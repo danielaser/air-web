@@ -1,18 +1,16 @@
 export interface IReservationData {
-    status: string;  
+    id: string;
+    state: string;
+    departureDate: Date;
+    arrivalDate: Date;
     origin: string;
     destination: string;
-    reservationCode: string;  
-    flightDate: string;  
-    departureTime: string;  
-    arrivalTime: string;  
-    flightDuration: string;  
-    reservedBy: string;  
-    email: string;  
-    flightClass: string;  
-    purchaseDate: string;  
-    paymentMethod: string;  
-    passengersCount: number;  
-    tax: number;  
-    price: number;  
+    reservationCode: string;
+    creationDate: Date;
+    paymentMethod: string;
+    passengers: string;
+    email: string;
+    taxes: number;
+    numberPassengers: number;
+    totalPrice: number;
 }

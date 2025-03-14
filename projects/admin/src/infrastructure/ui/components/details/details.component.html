@@ -9,59 +9,58 @@
                     <div class="details__column">
                         <div class="details__initial">
                             <h2 class="details__subtitle">Pasajero</h2>
-                            <p class="details__text">{{detailsData().reservedBy}}</p>
+                            <p class="details__text">{{detailsData().passengers}}</p>
                         </div>
         
                         <div class="details__initial">
                             <h2 class="details__subtitle">Clase</h2>
-                            <p class="details__text">{{detailsData().flightClass}}</p>
+                            <p class="details__text">Economica</p>
                         </div>
         
                         <div class="details__initial">
                             <h2 class="details__subtitle">Fecha de compra</h2>
-                            <p class="details__text">{{detailsData().purchaseDate}}</p>
+                            <p class="details__text">{{detailsData().creationDate | date}}</p>
                         </div>
         
                         <div class="details__initial">
                             <h2 class="details__subtitle">Método de pago</h2>
                             <p class="details__text">{{detailsData().paymentMethod}}</p>
                         </div>
-        
                     </div>
         
                     <div class="details__row">
                         <div class="details__group">
-                            <h2 class="details__subtitle">Documento del pasajero</h2>
+                            <h2 class="details__subtitle">Email del pasajero</h2>
                             <p class="details__text">{{detailsData().email}}</p>
                         </div>
-                        <div class="details__group">
+                        <div class="details__group">    
                             <h2 class="details__subtitle">Impuestos</h2>
-                            <p class="details__text">{{detailsData().tax}}</p>
+                            <p class="details__text">{{detailsData().taxes | currency}}</p>
                         </div>
         
                         <div class="details__group">
                             <h2 class="details__subtitle">Cantidad de pasajeros</h2>
-                            <p class="details__text">{{detailsData().passengersCount}}</p>
+                            <p class="details__text">{{detailsData().numberPassengers}}</p>
                         </div>
         
                         <div class="details__group">
                             <h2 class="details__subtitle">Precio</h2>
-                            <p class="details__text">{{detailsData().price}}</p>
+                            <p class="details__text">{{detailsData().totalPrice | currency}}</p>
                         </div>
         
-                        <div class="details__status" [ngClass]="{'pending': detailsData().status === 'Pending', 'confirmed': detailsData().status === 'Confirmed', 'cancelled': detailsData().status === 'Cancelled'}">
-                            @if (detailsData().status === "Pending") {
+                        <div class="details__status" [ngClass]="{'pending': detailsData().state === 'Pending', 'confirmed': detailsData().state === 'Confirmed', 'cancelled': detailsData().state === 'Cancelled'}">
+                            @if (detailsData().state === "Pending") {
                                 <p class="details__alert">
                                         <img src="admin/watch.svg" alt="warning" class="details__alert-icon">
                                     La reserva sigue pendiente
                                 </p>
                             }
-                            @if (detailsData().status === "Confirmed") {
+                            @if (detailsData().state === "Confirmed") {
                                 <p class="details__alert">
                                         <img src="admin/check.svg" alt="warning" class="details__alert-icon">
                                     La reserva ha sido confirmada
                                 </p>
-                            }@if (detailsData().status === "Cancelled") {
+                            }@if (detailsData().state === "Cancelled") {
                                 <p class="details__alert">
                                     <img src="admin/watch.svg" alt="warning" class="details__alert-icon">
                                 La reserva ha sido cancelada
@@ -71,7 +70,7 @@
                         </div>    
                     </div>
                 </section>
-                <footer class="details__actions" [ngStyle]="{'display': detailsData().status === 'Pending' ? 'flex' : 'none'}">
+                <footer class="details__actions" [ngStyle]="{'display': detailsData().state === 'Pending' ? 'flex' : 'none'}">
                 <lib-modal
                     [title]="'¿Estas seguro que quieres emitir?'"
                     [actionText]="'Confirmar'" 

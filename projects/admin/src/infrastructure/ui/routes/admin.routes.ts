@@ -7,10 +7,10 @@ export const adminRoutes: Routes = [
         path: '',
         component: AdminLayoutComponent,
         children: [
-            {
-              path: 'view',
-              loadComponent: () => import('../container/view-analytics-container/view-analytics-container.component').then(m => m.ViewAnalyticsContainerComponent)
-            },
+            // {
+            //   path: 'view',
+            //   loadComponent: () => import('../container/view-analytics-container/view-analytics-container.component').then(m => m.ViewAnalyticsContainerComponent)
+            // },
             {
               path:'booking',
               component: ReservaContainerComponent

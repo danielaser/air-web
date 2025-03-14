@@ -13,11 +13,11 @@
                             <span class="accordion__info-iconCalendar">
                                 <img src="admin/calendar.svg" alt="calendar">
                             </span>
-                            <span class="accordion__info-date accordion__info-date--especial">{{data.flightDate}}</span>
-                            <span class="accordion__info-time">{{data.arrivalTime}} - {{data.departureTime}}</span>
+                            <span class="accordion__info-date accordion__info-date--especial">{{data.departureDate | date}}</span>
+                            <!-- <span class="accordion__info-time">{{data.arrivalDate | date }} - {{data.departureDate | date}}</span> -->
                         </div>
                         <div class="accordion__info-state">
-                                <p class="accordion__info-state" [ngClass]="{'pending': data.status === 'Pending', 'confirmed': data.status === 'Confirmed', 'cancelled': data.status === 'Cancelled'}">{{data.status}}</p>
+                                <p class="accordion__info-state" [ngClass]="{'pending': data.state}">{{data.state}}</p>
                         </div>
                     </div>
                 </section>
