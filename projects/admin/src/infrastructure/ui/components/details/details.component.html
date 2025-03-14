@@ -48,19 +48,19 @@
                             <p class="details__text">{{detailsData().totalPrice | currency}}</p>
                         </div>
         
-                        <div class="details__status" [ngClass]="{'pending': detailsData().state === 'Pending', 'confirmed': detailsData().state === 'Confirmed', 'cancelled': detailsData().state === 'Cancelled'}">
-                            @if (detailsData().state === "Pending") {
+                        <div class="details__status" [ngClass]="{'pending': detailsData().state === 'PENDING', 'confirmed': detailsData().state === 'CONFIRMED', 'cancelled': detailsData().state === 'CANLELLED'}">
+                            @if (detailsData().state === "PENDING") {
                                 <p class="details__alert">
                                         <img src="admin/watch.svg" alt="warning" class="details__alert-icon">
                                     La reserva sigue pendiente
                                 </p>
                             }
-                            @if (detailsData().state === "Confirmed") {
+                            @if (detailsData().state === "CONFIRMED") {
                                 <p class="details__alert">
                                         <img src="admin/check.svg" alt="warning" class="details__alert-icon">
                                     La reserva ha sido confirmada
                                 </p>
-                            }@if (detailsData().state === "Cancelled") {
+                            }@if (detailsData().state === "CANLELLED") {
                                 <p class="details__alert">
                                     <img src="admin/watch.svg" alt="warning" class="details__alert-icon">
                                 La reserva ha sido cancelada
@@ -70,10 +70,10 @@
                         </div>    
                     </div>
                 </section>
-                <footer class="details__actions" [ngStyle]="{'display': detailsData().state === 'Pending' ? 'flex' : 'none'}">
+                <footer class="details__actions" [ngStyle]="{'display': detailsData().state === 'CONFIRMED' ? 'flex' : 'none'}">
                 <lib-modal
                     [title]="'¿Estas seguro que quieres emitir?'"
-                    [actionText]="'Confirmar'" 
+                    [actionText]="'Emitir'" 
                     (onConfirm)="confirma()"
                     (onCancel)="cancela()"
                     [variant]="'primary'"
