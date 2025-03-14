@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, Input } from '@angular/core';
 import { SvgIconComponent } from "../svg-icon/svg-icon.component";
-import { AnaliticalCard } from '../../../../domain/model/analitical-card-model';
+import { IAnaliticalCard } from '../../../../domain/model/analitical-card-model';
 
 
 @Component({
@@ -11,6 +11,6 @@ import { AnaliticalCard } from '../../../../domain/model/analitical-card-model';
   styleUrl: './analitical-card.component.scss'
 })
 export class AnaliticalCardComponent {
-  carData = input<AnaliticalCard>();
+  carData = input<IAnaliticalCard>();
 
 }

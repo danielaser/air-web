@@ -2,6 +2,8 @@
  * Public API Surface of shared
  */
 
+export { urlResources } from './environments/environment';
+
 export { AdminHeaderComponent } from './infrastructure/ui/components/admin-header/admin-header.component';
 
 export { StateFactory } from './domain/state/state.factory';

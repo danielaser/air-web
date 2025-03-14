@@ -1,7 +1,7 @@
 import { Component, effect, input, Input, OnInit, signal } from '@angular/core';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { Observable } from 'rxjs';
-import { ChartSeries } from '../../../../domain/model/chart-series-model';
+import { IChartSeries } from '../../../../domain/model/chart-series-model';
 
 @Component({
   selector: 'lib-pie-chart',
@@ -11,7 +11,7 @@ import { ChartSeries } from '../../../../domain/model/chart-series-model';
 })
 export class PieChartComponent implements OnInit {
 
-   @Input() pieDataSeries: Observable<ChartSeries>;
+   @Input() pieDataSeries: Observable<IChartSeries>;
 
     chartOptions = {};
     confirmed = signal<number>(0);

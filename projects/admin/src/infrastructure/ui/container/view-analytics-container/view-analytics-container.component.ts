@@ -1,9 +1,9 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ViewAnalyticsComponent } from "../../components/view-analytics/view-analytics.component";
-import { GetReservationUseCase } from '../../../../application/get-reservations.usecase';
 import { Observable } from 'rxjs';
-import { IReservationData } from '../../../../domain/model/reservation.model';
 import { CommonModule } from '@angular/common';
+import { FindAllAnalyticsUseCase } from '../../../../application/find-all-analytics-usecase';
+import { IAnalyticsData } from '../../../../domain/model/analytics-data-model';
 
 @Component({
   selector: 'lib-view-analytics-container',
@@ -12,19 +12,18 @@ import { CommonModule } from '@angular/common';
 })
 export class ViewAnalyticsContainerComponent implements OnInit, OnDestroy {
 
-  private readonly _findAllBookingsUseCase = inject(GetReservationUseCase);
+  private readonly _findAllAnalyticsData = inject(FindAllAnalyticsUseCase);
 
-  bookings$ : Observable<IReservationData[]>;
+  bookings$ : Observable<IAnalyticsData>;
 
   ngOnInit(): void {
-    this._findAllBookingsUseCase.initSubscriptions();
-    this._findAllBookingsUseCase.execute();
-    this.bookings$ = this._findAllBookingsUseCase.allReservations$()
-    console.log(this.bookings$);
+    this._findAllAnalyticsData.initSubscriptions();
+    this._findAllAnalyticsData.execute();
+    this.bookings$ = this._findAllAnalyticsData.analytics$();
 
   }
   ngOnDestroy(): void {
-    this._findAllBookingsUseCase.destroySubscriptions();
+    this._findAllAnalyticsData.destroySubscriptions();
 
   }
 

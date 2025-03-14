@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, Input, input } from '@angular/core';
 import { BarChartComponent } from "../bar-chart/bar-chart.component";
-import { ChartSeries } from '../../../../domain/model/chart-series-model';
+import { IChartSeries } from '../../../../domain/model/chart-series-model';
 import { PieChartComponent } from "../pie-chart/pie-chart.component";
 import { Observable } from 'rxjs';
 
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class CanvasCardComponent {
   chartHeader= input<string>();
-  chartData = input<Observable<ChartSeries>>();
+  chartData = input<Observable<IChartSeries>>();
   @Input({transform: booleanAttribute}) isBar? : boolean = false;
 
 }

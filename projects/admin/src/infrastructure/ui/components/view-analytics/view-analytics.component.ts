@@ -1,12 +1,13 @@
 import { Component, effect, Input, signal } from '@angular/core';
 import { AdminHeaderComponent } from 'shared';
 import { AnaliticalCardComponent } from "../analitical-card/analitical-card.component";
-import { AnaliticalCard } from '../../../../domain/model/analitical-card-model';
+import { IAnaliticalCard } from '../../../../domain/model/analitical-card-model';
 import { CommonModule } from '@angular/common';
 import { IReservationData } from '../../../../domain/model/reservation.model';
 import { CanvasCardComponent } from "../canvas-card/canvas-card.component";
-import { ChartSeries } from '../../../../domain/model/chart-series-model';
+import { IChartSeries } from '../../../../domain/model/chart-series-model';
 import { BehaviorSubject } from 'rxjs';
+import { IAnalyticsData } from '../../../../domain/model/analytics-data-model';
 
 @Component({
   selector: 'lib-view-analytics',
@@ -16,10 +17,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ViewAnalyticsComponent {
 
-  private _bookings: IReservationData[] = [];
-  @Input() set bookings (value: IReservationData[]){
+  private _bookings: IAnalyticsData;
+  @Input() set bookings (value: IAnalyticsData){
     this._bookings = value;
-    this.calculateTotals();
+    this.bindingTotals();
     this.updateCards();
   };
 
@@ -30,32 +31,22 @@ export class ViewAnalyticsComponent {
   canceled = signal<number>(0);
   pending = signal<number>(0);
 
-  cards = signal<AnaliticalCard[]>([]);
-  chartMetrics = new BehaviorSubject<ChartSeries>({} as ChartSeries);
-  calculateTotals() {
+  cards = signal<IAnaliticalCard[]>([]);
+  chartMetrics = new BehaviorSubject<IChartSeries>({} as IChartSeries);
+  bindingTotals() {
     if (this.bookings) {
-      this.totalBookings.set(this.bookings.length);
-      this.total.set(this.bookings.reduce((sum, b) => sum + b.price, 0));
-      this.totalTax.set(this.bookings.reduce((sum, b) => sum + b.tax, 0));
-      this.defineStatus()
+      this.totalBookings.set(this.bookings.totalBookings);
+      this.totalTax.set(this.bookings.totalTaxes);
+      this.total.set(this.bookings.incomeWithoutTaxes);
+      this.defineStatus();
+
     }
   }
 
   defineStatus() {
-    this.confirmed.set(0);
-    this.canceled.set(0);
-    this.pending.set(0);
-
-    this.bookings.forEach((b) => {
-      const status = b.status.toLowerCase();
-      if (status === 'confirmed') {
-        this.confirmed.update((value) => value + 1);
-      } else if (status === 'cancelled') {
-        this.canceled.update((value) => value + 1);
-      } else if (status === 'pending') {
-        this.pending.update((value) => value + 1);
-      }
-    });
+    this.confirmed.set(this.bookings.stateCounts.CONFIRMED);
+    this.canceled.set(this.bookings.stateCounts.CANCELED);
+    this.pending.set(this.bookings.stateCounts.PENDING);
 
     this.chartMetrics.next({
       confirmed: this.confirmed(),
@@ -64,7 +55,7 @@ export class ViewAnalyticsComponent {
       bookings: this.totalBookings()
     })
   }
-  get bookings(): IReservationData[] {
+  get bookings(): IAnalyticsData {
     return this._bookings;
   }
 

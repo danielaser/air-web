@@ -1,6 +1,6 @@
 import { Component, effect, Input, OnInit, signal } from '@angular/core';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-import { ChartSeries } from '../../../../domain/model/chart-series-model';
+import { IChartSeries } from '../../../../domain/model/chart-series-model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class BarChartComponent implements OnInit {
 
- @Input() barData: Observable<ChartSeries>;
+ @Input() barData: Observable<IChartSeries>;
   chartOptions = {};
   confirmed = signal<number>(0);
   canceled= signal<number>(0);
