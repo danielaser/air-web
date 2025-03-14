@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IReservationData } from '../../domain/model/reservation.model';
+import { urlResources } from 'shared';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,9 @@ import { IReservationData } from '../../domain/model/reservation.model';
 export class GetReservationsService {
 
   private readonly _http = inject(HttpClient);
-
   execute(): Observable<IReservationData[]> {
-    return this._http.get<IReservationData[]>("http://localhost:8080/api/confirmed-booking");
+    return this._http.get<IReservationData[]>(urlResources.booking);
   }
 }
+
+

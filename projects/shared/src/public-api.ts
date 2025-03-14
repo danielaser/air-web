@@ -12,3 +12,4 @@ export type { INavRouter } from './domain/model/navRouter.model';
 export {ModalComponent} from './infrastructure/ui/components/modal/modal.component';
 export {environment} from './environments/environment';
 export {SidebarComponent} from './infrastructure/ui/components/sidebar/sidebar.component';
+export {urlResources} from './environments/environment';
